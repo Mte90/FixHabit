@@ -1,0 +1,17 @@
+{
+  "startDate": "2017-12-17",
+  "congratsTime": 21,
+  "tasks": [
+    {
+      "label": "Test 1",
+      "script": ""
+    },
+    {
+      "label": "Test 2"
+    },
+    {
+      "label": "Test 3"
+    }
+  ],
+  "remindMe": 900
+}
