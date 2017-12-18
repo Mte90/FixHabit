@@ -14,6 +14,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     #Create settings for the software
     settings = QSettings('Mte90', 'FixHabit')
     settings.setFallbacksEnabled(False)
+    path = os.path.dirname(sys.argv[0]) + '/'
     version = '1.0'
     appname = 'FixHabit - ' + version + ' by Mte90'
 
@@ -48,7 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             parser = argparse.ArgumentParser()
             parser.add_argument("--hide", help="hide the window at startup", action="store_true")
             args = parser.parse_args()
-            self.data = json.load(open('config.json'))
+            self.data = json.load(open(self.path + 'config.json'))
             timer = QTimer()
             timer.timeout.connect(self.show)
             timer.start(self.data['remindMe'])
@@ -91,7 +92,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(wid) > 0:
             wid = wid[0]
         return wid
-    
+
     def openRemind(self):
         self.hide()
 
