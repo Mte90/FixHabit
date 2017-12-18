@@ -53,7 +53,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             timer = QTimer()
             timer.timeout.connect(self.show)
             timer.start(self.data['remindMe'])
-            self.ui.bootTime.setText('Boot time: ' + strftime("%Y-%m-%d", localtime()))
+            self.ui.bootTime.setText('Boot time: ' + strftime("%Y-%m-%d %H:%M", localtime()))
             now = datetime.strptime(strftime("%Y/%m/%d", localtime()), "%Y/%m/%d")
             defined = datetime.strptime(self.data['startDate'], "%Y/%m/%d")
             delta = defined - now
