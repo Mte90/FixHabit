@@ -50,9 +50,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             parser.add_argument("--hide", help="hide the window at startup", action="store_true")
             args = parser.parse_args()
             self.data = json.load(open(self.path + 'config.json'))
-            timer = QTimer()
-            timer.timeout.connect(self.show)
-            timer.start(self.data['remindMe'])
             self.ui.bootTime.setText('Boot time: ' + strftime("%Y-%m-%d %H:%M", localtime()))
             now = datetime.strptime(strftime("%Y/%m/%d", localtime()), "%Y/%m/%d")
             defined = datetime.strptime(self.data['startDate'], "%Y/%m/%d")
@@ -60,6 +57,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.ui.bootTime.setStyleSheet("QLabel { color : red; }")
             if delta.days > self.data['congratsTime']:
                 self.ui.bootTime.setStyleSheet("QLabel { color : green; }")
+            if self.data['remindMe']:
+                self.ui.remind.setText('Remind in ' + str(int(self.data['remindMe'])/60) + ' minutes')
             # Show the form
             self.loadTasks()
             self.show()
@@ -93,8 +92,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             wid = wid[0]
         return wid
 
-    def openRemind(self):
+    def openRemind(self, parent):
         self.hide()
+        self.timer = QTimer(self)
+        self.timer.start(int(self.data['remindMe']) * 1000)
+        self.timer.setSingleShot(True)
+        self.timer.timeout.connect(self.showWindow)
+
+    def showWindow(self):
+        self.show()
 
 def move_under_cursor():
     mouse = QCursor.pos()
