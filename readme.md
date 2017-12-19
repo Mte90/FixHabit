@@ -25,4 +25,4 @@ Many study say that to get an habit there are required 21 days so you can config
 The rest of the tiny window is a tiny checkbox list to use as you prefer.  
 
 ### Run scripts
-A task can have a script to launch that is executed atutomatically with the script.
+A task can have a script to launch that is executed automatically with the script itself.

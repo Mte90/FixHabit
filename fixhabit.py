@@ -59,6 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ui.bootTime.setStyleSheet("QLabel { color : green; }")
             if self.data['remindMe']:
                 self.ui.remind.setText('Remind in ' + str(int(self.data['remindMe'])/60) + ' minutes')
+                self.openRemind()
             # Show the form
             self.loadTasks()
             self.show()
