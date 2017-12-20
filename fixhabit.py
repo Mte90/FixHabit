@@ -75,7 +75,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for tasks in self.data['tasks']:
             item = QStandardItem(tasks['label'])
             try:
-                if not tasks['script']:
+                if tasks['script']:
                     os.popen(tasks['script'])
             except:
                 pass
