@@ -59,7 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.ui.bootTime.setStyleSheet("QLabel { color : green; }")
             if self.data['remindMe']:
                 self.ui.remind.setText('Remind in ' + str(int(self.data['remindMe'])/60) + ' minutes')
-                self.openRemind()
+                self.openRemind(parent)
             # Show the form
             self.loadTasks()
             self.show()
@@ -103,9 +103,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def showWindow(self):
         self.show()
 
+
 def move_under_cursor():
     mouse = QCursor.pos()
     os.system('xdotool getactivewindow windowmove ' + str(mouse.x() - 50) + ' ' + str(mouse.y() - 50))
+
 
 def main():
     # Start the software
@@ -115,6 +117,7 @@ def main():
     ui.setupUi(MainWindow_)
     # Add the close feature at the program with the X
     sys.exit(app.exec_())
+
 
 # Execute the software
 main()
