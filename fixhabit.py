@@ -80,6 +80,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             except:
                 pass
             check = Qt.Unchecked
+            try:
+                if tasks['check'] == "true": 
+                    check = Qt.Checked
+            except:
+                pass
             item.setCheckState(check)
             item.setCheckable(True)
             # populate the listview

@@ -26,3 +26,6 @@ The rest of the tiny window is a tiny checkbox list to use as you prefer.
 
 ### Run scripts
 A task can have a script to launch that is executed automatically with the script itself.
+
+### Autocheck
+A task with a parameter can be already checked on the window.

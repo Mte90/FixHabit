@@ -4,7 +4,8 @@
   "tasks": [
     {
       "label": "Test 1",
-      "script": ""
+      "script": "",
+      "check": "true"
     },
     {
       "label": "Test 2"
