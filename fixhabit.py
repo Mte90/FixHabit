@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 # pylint: disable=fixme, line-too-long
-#Initialize PyQT
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-#The fondamental for working with python
+# Initialize PyQT
+from PyQt5.QtCore import QSettings, QTimer, Qt
+from PyQt5.QtGui import QCursor, QStandardItem, QStandardItemModel
+from PyQt5.QtWidgets import QMainWindow, QApplication
+# The fondamental for working with python
 import os, sys, signal, argparse, json
-from time import time, strftime, localtime
-from datetime import timedelta, datetime
+from time import strftime, localtime
+from datetime import datetime
 from ui_main import Ui_MainWindow
 
+
 class MainWindow(QMainWindow, Ui_MainWindow):
-    #Create settings for the software
+    # Create settings for the software
     settings = QSettings('Mte90', 'FixHabit')
     settings.setFallbacksEnabled(False)
     path = os.path.dirname(sys.argv[0]) + '/'
@@ -24,14 +25,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if_focus = os.popen('xdotool getactivewindow').readlines()
         # hide if the window have focues when executed again
         if if_focus[0] == wid:
-            os.system('xdotool windowunmap "' + wid + '"')
+            os.system('xdotool windowunmap "' + str(wid) + '"')
             sys.exit()
         # Software already opened
         if wid:
             # Show
-            os.system('xdotool windowmap ' + wid)
+            os.system('xdotool windowmap ' + str(wid))
             # get focus
-            os.system('xdotool windowactivate ' + wid)
+            os.system('xdotool windowactivate ' + str(wid))
             move_under_cursor()
             sys.exit()
         else:
@@ -67,7 +68,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 move_under_cursor()
             else:
                 wid = self.get_pid()
-                os.popen('xdotool windowunmap "' + wid + '"')
+                os.popen('xdotool windowunmap "' + str(wid) + '"')
 
     def loadTasks(self):
         # get project tasks
@@ -81,7 +82,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 pass
             check = Qt.Unchecked
             try:
-                if tasks['check'] == "true": 
+                if tasks['check'] == "true":
                     check = Qt.Checked
             except:
                 pass
