@@ -75,17 +75,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         qsubtasks = QStandardItemModel()
         for tasks in self.data['tasks']:
             item = QStandardItem(tasks['label'])
-            try:
-                if tasks['script']:
-                    os.popen(tasks['script'])
-            except:
-                pass
+            if 'script' in tasks:
+                os.popen(tasks['script'])
             check = Qt.Unchecked
-            try:
-                if tasks['check'] == "true":
-                    check = Qt.Checked
-            except:
-                pass
+            if 'check' in tasks and tasks['check'] == "true":
+                check = Qt.Checked
             item.setCheckState(check)
             item.setCheckable(True)
             # populate the listview
@@ -93,7 +87,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ui.taskLists.setModel(qsubtasks)
 
     def get_pid(self):
-        wid = os.popen('xdotool search --name "' + self.appname + '"').readlines()
+        wid = os.popen('xdotool search --name "' + str(self.appname) + '"').readlines()
         # Check if multiple rows output
         if len(wid) > 0:
             wid = wid[0]
