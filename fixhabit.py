@@ -106,7 +106,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 def move_under_cursor():
     mouse = QCursor.pos()
-    os.system('xdotool getactivewindow windowmove ' + str(mouse.x() - 50) + ' ' + str(mouse.y() - 50))
+    os.system('xdotool getactivewindow windowmove ' + str(abs(mouse.x() - 50)) + ' ' + str(mouse.y() - 50))
 
 
 def main():
