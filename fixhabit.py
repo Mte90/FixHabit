@@ -76,7 +76,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for tasks in self.data['tasks']:
             item = QStandardItem(tasks['label'])
             if 'script' in tasks:
-                os.popen(tasks['script'])
+                p = os.popen(tasks['script'])
+                print(p.read())
             check = Qt.Unchecked
             if 'check' in tasks and tasks['check'] == "true":
                 check = Qt.Checked
@@ -118,6 +119,8 @@ def main():
     # Add the close feature at the program with the X
     sys.exit(app.exec_())
 
-
+try:
 # Execute the software
-main()
+    main()
+except Exception as e:
+    print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
